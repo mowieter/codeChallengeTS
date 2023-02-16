@@ -14,5 +14,27 @@ export const getConsecutiveItems = (
   items: string | number,
   key: string | number
 ) => {
-  return false;
+  const strItems = items.toString(); // convert to string if items is a number
+  const strKey = key.toString(); // convert to string if key is a number
+
+  if (!strItems.includes(strKey)) {
+    return 0;
+  }
+
+  let longestConsecutiveLength = 0;
+  let currentConsecutiveLength = 0;
+
+  for (let i = 0; i < strItems.length; i++) {
+    if (strItems[i] === strKey) {
+      currentConsecutiveLength++;
+      longestConsecutiveLength = Math.max(
+        longestConsecutiveLength,
+        currentConsecutiveLength
+      );
+    } else {
+      currentConsecutiveLength = 0;
+    }
+  }
+
+  return longestConsecutiveLength;
 };
